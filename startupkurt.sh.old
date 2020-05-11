@@ -1,0 +1,68 @@
+#!/bin/bash
+sleep 30
+firstrun=1
+while true
+
+do
+
+sudo timeout 5s bash -c "nc -w 3 -n -vz 192.168.0.233 8000"
+reply=$?
+if [ $reply -eq 0 ];
+	then
+	printf "Ip found............................."
+	sleep 5
+	if [ $firstrun -eq 1 ];
+		then
+		firstrun=0
+		aplay -l | grep 'USB Sound Device' |grep 'card 0'
+		if [ $? -eq 0 ];
+			then
+			timeout 5s alsa_out -d hw:0
+			sudo darkice -c /home/pi/Desktop/darkice0.cfg &
+			printf "usb 0....."
+			sleep 5
+		fi
+		aplay -l | grep 'USB Sound Device' |grep 'card 1'
+                if [ $? -eq 0 ];
+			then
+                        timeout 5s alsa_out -d hw:1
+                        sudo darkice -c /home/pi/Desktop/darkice1.cfg &
+			printf "usb 1....."
+                        sleep 5
+
+                fi
+		aplay -l | grep 'USB Sound Device' |grep 'card 2'
+                if [ $? -eq 0 ];
+			then
+                        timeout 5s alsa_out -d hw:2
+                        sudo darkice -c /home/pi/Desktop/darkice2.cfg &
+			printf "usb 2....."
+                        sleep 5
+                fi
+		aplay -l | grep 'USB Sound Device' |grep 'card 3'
+                if [ $? -eq 0 ];
+			then
+                        timeout 5s alsa_out -d hw:3
+                        sudo darkice -c /home/pi/Desktop/darkice3.cfg &
+			printf "usb 3....."
+                        sleep 5
+                fi
+		aplay -l | grep 'USB Sound Device' |grep 'card 4'
+                if [ $? -eq 0 ];
+			then
+                        timeout 5s alsa_out -d hw:4 &
+                        sudo darkice -c /home/pi/Desktop/darkice4.cfg &
+			printf "usb 4....."
+                        sleep 5
+                fi
+	fi
+	else
+	if [ $firstrun -eq 0 ]
+		then
+		firstrun=1
+		sudo kill $(pidof darkice)
+		sudo kill $(pidof darkice)
+	fi
+fi
+sleep 10
+done

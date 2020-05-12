@@ -30,7 +30,7 @@ if [ $reply -eq 0 ];
                         then
                         USB_Right_Up=true
                         timeout 5s alsa_out -d hw:USB_Right_UP
-                        sudo darkice -c /home/pi/Desktop/darkice3.cfg &
+                        sudo darkice -c /home/pi/Desktop/USB_Right_UP.cfg &
                         pid_tree=$!
                         printf "\r\n$pid_tree....\r\n$USB_Right_Up.....\r\nUsb 3.....\r\n"
                         sleep 5
@@ -40,7 +40,7 @@ if [ $reply -eq 0 ];
                         then
                         USB_Right_Down=true
                         timeout 5s alsa_out -d hw:USB_Right_DOWN
-                        sudo darkice -c /home/pi/Desktop/darkice4.cfg &
+                        sudo darkice -c /home/pi/Desktop/USB_Right_DOWN.cfg &
                         pid_four=$!
                         printf "\r\n$pid_four....\r\n$USB_Right_Down.....\r\nUsb 4.....\r\n"
                         sleep 5
@@ -50,7 +50,7 @@ if [ $reply -eq 0 ];
 			then
 			USB_Left_Up=true
                         timeout 5s alsa_out -d hw:USB_Left_UP
-                        sudo darkice -c /home/pi/Desktop/darkice1.cfg &
+                        sudo darkice -c /home/pi/Desktop/USB_Left_UP.cfg &
 			pid_one=$!
 			printf "\r\n$pid_one....\r\n$USB_Left_Up.....\r\nUsb 1.....\r\n"
                         sleep 5
@@ -61,7 +61,7 @@ if [ $reply -eq 0 ];
 			then
 			USB_Left_Down=true
                         timeout 5s alsa_out -d hw:USB_Left_DOWN
-                        sudo darkice -c /home/pi/Desktop/darkice2.cfg &
+                        sudo darkice -c /home/pi/Desktop/USB_Left_DOWN.cfg &
 			pid_two=$!
 			printf "\r\n$pid_two....\r\n$USB_Left_Down.....\r\nUsb 2.....\r\n"
                         sleep 5
